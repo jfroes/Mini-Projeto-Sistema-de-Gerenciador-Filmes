@@ -20,6 +20,14 @@ public class Filme {
         this.nota = nota;
     }
 
+    public Filme(String titulo, String genero, String diretor, Integer ano, Double nota) {
+        this.titulo = titulo;
+        this.genero = genero;
+        this.diretor = diretor;
+        this.ano = ano;
+        this.nota = nota;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -66,18 +74,6 @@ public class Filme {
 
     public void setNota(Double nota) {
         this.nota = nota;
-    }
-
-    @Override
-    public String toString() {
-        return "Filme{" +
-                "id=" + id +
-                ", titulo='" + titulo + '\'' +
-                ", genero='" + genero + '\'' +
-                ", diretor='" + diretor + '\'' +
-                ", ano=" + ano +
-                ", nota=" + nota +
-                '}';
     }
 
     @Override
