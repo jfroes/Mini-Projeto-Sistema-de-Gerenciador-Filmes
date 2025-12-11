@@ -49,6 +49,26 @@ public class FilmeService {
         }
     }
 
+    public List<FilmeDTO> findByNotaMin(){
+        try{
+            List<Filme> filmes = repository.findByNotaMin();
+            return filmes.stream().map(filme -> new FilmeDTO(filme)).toList();
+
+        }catch (ResourceNotFoundExeception | NoSuchElementException e){
+            throw new ResourceNotFoundExeception("Recurso não encontrado.");
+        }
+    }
+
+    public List<FilmeDTO> findByNotaMax(){
+        try{
+            List<Filme> filmes = repository.findByNotaMax();
+            return filmes.stream().map(filme -> new FilmeDTO(filme)).toList();
+
+        }catch (ResourceNotFoundExeception | NoSuchElementException e){
+            throw new ResourceNotFoundExeception("Recurso não encontrado.");
+        }
+    }
+
     public FilmeDTO update (FilmeDTO dto){
         try{
             if (repository.findAll().stream().anyMatch(f -> f.getTitulo().equalsIgnoreCase(dto.getTitulo())) &&

@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,6 +66,16 @@ public class FilmeRepository {
     public List<Filme> findByGenero(String genero){
         List<Filme> filmes = findAll();
         return  filmes.stream().filter(f -> f.getGenero().equalsIgnoreCase(genero)).toList();
+    }
+
+    public List<Filme> findByNotaMin(){
+        List<Filme> filmes = findAll();
+        return filmes.stream().sorted(Comparator.comparingDouble(Filme::getNota)).toList();
+    }
+
+    public List<Filme> findByNotaMax(){
+        List<Filme> filmes = findAll();
+        return filmes.stream().sorted(Comparator.comparingDouble(Filme::getNota).reversed()).toList();
     }
 
     public Filme update(Filme filme){

@@ -11,7 +11,7 @@ public class App {
         FilmeService service = new FilmeService();
         FilmeRepository repository = new FilmeRepository();
 
-        List<FilmeDTO> filmes = service.findByGenero("Máfia");
+        List<FilmeDTO> filmes = service.findByNotaMax();
         filmes.forEach(System.out::println);
     }
 }
