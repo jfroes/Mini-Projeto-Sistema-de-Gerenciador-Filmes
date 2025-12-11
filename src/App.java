@@ -9,13 +9,9 @@ import java.util.List;
 public class App {
     public static void main(String[] args) {
         FilmeService service = new FilmeService();
+        FilmeRepository repository = new FilmeRepository();
 
-        Filme filme = new Filme(0,"As tranças do rei creca", "imaginação", "Biru Leiby", 1974, 8.7);
-        FilmeDTO dto = new FilmeDTO(filme);
-        service.insert(dto);
-
-        List<FilmeDTO> filmes = service.findAll();
-
+        List<FilmeDTO> filmes = service.findByGenero("Máfia");
         filmes.forEach(System.out::println);
     }
 }

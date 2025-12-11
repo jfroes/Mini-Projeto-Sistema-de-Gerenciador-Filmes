@@ -1,0 +1,8 @@
+1;Duro de Matar;Ação;John McTiernan;1988;5.3
+2;Poderoso Chefao;Máfia;Francis Ford Coppola;1972;9.9
+3;O Senhor dos Anéis: A Sociedade do Anel;Fantasia;Peter Jackson;2001;9.0
+4;Matrix;Ficção Científica;Lana Wachowski e Lilly Wachowski;1999;8.7
+5;Clube da Luta;Drama;David Fincher;1999;8.8
+6;Forrest Gump;Drama;Robert Zemeckis;1994;8.8
+7;Gladiador;Ação;Ridley Scott;2000;8.5
+8;A Origem;Ficção Científica;Christopher Nolan;2010;8.8
