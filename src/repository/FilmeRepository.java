@@ -1,5 +1,6 @@
 package repository;
 
+import dto.FilmeDTO;
 import entities.Filme;
 import exceptions.ResourceNotFoundExeception;
 
@@ -35,6 +36,10 @@ public class FilmeRepository {
 
     }
 
+    public Optional<Filme> findById(Integer id){
+        return findAll().stream().filter(filme -> filme.getId().equals(id)).findFirst();
+    }
+
     public List<Filme> findAll(){
         List<Filme> filmes = new ArrayList<>();
         try{
@@ -57,8 +62,9 @@ public class FilmeRepository {
         return filmes;
     }
 
-    public Optional<Filme> findById(Integer id){
-        return findAll().stream().filter(filme -> filme.getId().equals(id)).findFirst();
+    public List<Filme> findByGenero(String genero){
+        List<Filme> filmes = findAll();
+        return  filmes.stream().filter(f -> f.getGenero().equalsIgnoreCase(genero)).toList();
     }
 
     public Filme update(Filme filme){
@@ -102,4 +108,5 @@ public class FilmeRepository {
         List<Filme> filmes = findAll();
         return filmes.stream().mapToInt(Filme::getId).max().orElse( 0) + 1;
     }
+
 }

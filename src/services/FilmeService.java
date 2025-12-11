@@ -35,7 +35,17 @@ public class FilmeService {
             Filme filme = repository.findById(id).get();
             return new FilmeDTO(filme);
         }catch (ResourceNotFoundExeception | NoSuchElementException e){
-            throw new ResourceNotFoundExeception("recurso nao encontrado");
+            throw new ResourceNotFoundExeception("Recurso não encontrado.");
+        }
+    }
+
+    public List<FilmeDTO> findByGenero(String gender){
+        try{
+            List<Filme> filmes = repository.findByGenero(gender);
+            return filmes.stream().map(filme -> new FilmeDTO(filme)).toList();
+
+        }catch (ResourceNotFoundExeception | NoSuchElementException e){
+            throw new ResourceNotFoundExeception("Recurso não encontrado.");
         }
     }
 
@@ -52,7 +62,7 @@ public class FilmeService {
 
             return new FilmeDTO(filme);
         }catch (IndexOutOfBoundsException e){
-            throw new ResourceNotFoundExeception("Recurso não encontrado");
+            throw new ResourceNotFoundExeception("Recurso não encontrado.");
         }
     }
 }
