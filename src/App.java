@@ -1,9 +1,7 @@
 import dto.FilmeDTO;
-import entities.Filme;
 import repository.FilmeRepository;
 import services.FilmeService;
 
-import java.util.Comparator;
 import java.util.List;
 
 public class App {
@@ -11,7 +9,10 @@ public class App {
         FilmeService service = new FilmeService();
         FilmeRepository repository = new FilmeRepository();
 
-        List<FilmeDTO> filmes = service.findByNotaMax();
-        filmes.forEach(System.out::println);
+
+
+       List<FilmeDTO> filmesTitulo = service.findByDiretor("la");
+
+       filmesTitulo.forEach(System.out::println);
     }
 }

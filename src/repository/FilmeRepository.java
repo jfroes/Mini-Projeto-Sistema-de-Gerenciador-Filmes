@@ -1,6 +1,5 @@
 package repository;
 
-import dto.FilmeDTO;
 import entities.Filme;
 import exceptions.ResourceNotFoundExeception;
 
@@ -8,7 +7,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -68,16 +66,23 @@ public class FilmeRepository {
         return  filmes.stream().filter(f -> f.getGenero().equalsIgnoreCase(genero)).toList();
     }
 
-    public List<Filme> findByNotaMin(){
+    public List<Filme> findByTitulo(String titulo){
+        return findAll().stream().filter(filme -> filme.getTitulo().toLowerCase().contains(titulo.toLowerCase())).toList();
+    }
+
+    public List<Filme> findByDiretor(String diretor){
+        return findAll().stream().filter(filme -> filme.getDiretor().toLowerCase().contains(diretor.toLowerCase())).toList().stream().sorted(Comparator.comparing(Filme::getDiretor)).toList();
+    }
+
+        public List<Filme> getByNotaMin(){
         List<Filme> filmes = findAll();
         return filmes.stream().sorted(Comparator.comparingDouble(Filme::getNota)).toList();
     }
 
-    public List<Filme> findByNotaMax(){
+    public List<Filme> getByNotaMax(){
         List<Filme> filmes = findAll();
         return filmes.stream().sorted(Comparator.comparingDouble(Filme::getNota).reversed()).toList();
     }
-
     public Filme update(Filme filme){
         Filme existente = findById(filme.getId()).get();
 

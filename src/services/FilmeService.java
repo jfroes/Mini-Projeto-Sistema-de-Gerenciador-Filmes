@@ -6,7 +6,6 @@ import exceptions.DuplicatedResourceException;
 import exceptions.ResourceNotFoundExeception;
 import repository.FilmeRepository;
 
-import java.io.File;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -49,9 +48,26 @@ public class FilmeService {
         }
     }
 
-    public List<FilmeDTO> findByNotaMin(){
+    public List<FilmeDTO> findByDiretor(String diretor){
         try{
-            List<Filme> filmes = repository.findByNotaMin();
+            return repository.findByDiretor(diretor).stream().map(FilmeDTO::new).toList();
+        }catch (ResourceNotFoundExeception | NoSuchElementException e){
+            throw new ResourceNotFoundExeception("Recurso não encontrado.");
+
+        }
+    }
+
+    public List<FilmeDTO> findByTitulo(String titulo){
+        try{
+            return repository.findByTitulo(titulo).stream().map(FilmeDTO::new).toList();
+        }catch (ResourceNotFoundExeception | NoSuchElementException e){
+            throw new ResourceNotFoundExeception("Recurso não encontrado.");
+        }
+    }
+
+    public List<FilmeDTO> getByNotaMin(){
+        try{
+            List<Filme> filmes = repository.getByNotaMin();
             return filmes.stream().map(filme -> new FilmeDTO(filme)).toList();
 
         }catch (ResourceNotFoundExeception | NoSuchElementException e){
@@ -59,9 +75,9 @@ public class FilmeService {
         }
     }
 
-    public List<FilmeDTO> findByNotaMax(){
+    public List<FilmeDTO> getByNotaMax(){
         try{
-            List<Filme> filmes = repository.findByNotaMax();
+            List<Filme> filmes = repository.getByNotaMax();
             return filmes.stream().map(filme -> new FilmeDTO(filme)).toList();
 
         }catch (ResourceNotFoundExeception | NoSuchElementException e){
