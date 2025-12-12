@@ -6,6 +6,7 @@ import exceptions.DuplicatedResourceException;
 import exceptions.ResourceNotFoundExeception;
 import repository.FilmeRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -57,12 +58,22 @@ public class FilmeService {
         }
     }
 
-    public List<FilmeDTO> findByTitulo(String titulo){
+    public List<FilmeDTO> findByAno(int ano){
         try{
-            return repository.findByTitulo(titulo).stream().map(FilmeDTO::new).toList();
-        }catch (ResourceNotFoundExeception | NoSuchElementException e){
+            return repository.findByAno(ano).stream().map(FilmeDTO::new).toList();
+        }catch (ResourceNotFoundExeception e ){
             throw new ResourceNotFoundExeception("Recurso não encontrado.");
         }
+    }
+
+    public List<FilmeDTO> findByTitulo(String titulo){
+            List<FilmeDTO> filmes = new ArrayList<>();
+             filmes = repository.findByTitulo(titulo).stream().map(FilmeDTO::new).toList();
+
+             if (filmes.isEmpty()){
+                 throw new ResourceNotFoundExeception("Recurso não encontrado.");
+             }
+            return filmes;
     }
 
     public List<FilmeDTO> getByNotaMin(){

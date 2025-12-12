@@ -8,10 +8,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class FilmeRepository {
 
@@ -67,11 +64,15 @@ public class FilmeRepository {
     }
 
     public List<Filme> findByTitulo(String titulo){
-        return findAll().stream().filter(filme -> filme.getTitulo().toLowerCase().contains(titulo.toLowerCase())).toList();
+            return findAll().stream().filter(filme -> filme.getTitulo().toLowerCase().contains(titulo.toLowerCase())).toList();
     }
 
     public List<Filme> findByDiretor(String diretor){
-        return findAll().stream().filter(filme -> filme.getDiretor().toLowerCase().contains(diretor.toLowerCase())).toList().stream().sorted(Comparator.comparing(Filme::getDiretor)).toList();
+        return findAll().stream().filter(filme -> filme.getDiretor().toLowerCase().contains(diretor.toLowerCase())).toList();
+    }
+
+    public List<Filme> findByAno(int ano){
+        return findAll().stream().filter(filme -> filme.getAno() == ano).toList();
     }
 
         public List<Filme> getByNotaMin(){
