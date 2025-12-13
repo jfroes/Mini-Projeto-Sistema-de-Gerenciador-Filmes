@@ -14,7 +14,7 @@ public class FilmeRepository {
 
     private static final String ARQUIVO = "db.txt";
 
-    public void save(Filme filme){
+    public String save(Filme filme){
         String id = String.valueOf(gerarNovoId());
         String titulo = filme.getTitulo();
         String genero = filme.getGenero();
@@ -30,6 +30,7 @@ public class FilmeRepository {
             System.out.println(e.getMessage());
         }
 
+        return newFilme;
     }
 
     public Optional<Filme> findById(Integer id){
@@ -75,7 +76,7 @@ public class FilmeRepository {
         return findAll().stream().filter(filme -> filme.getAno() == ano).toList();
     }
 
-        public List<Filme> getByNotaMin(){
+    public List<Filme> getByNotaMin(){
         List<Filme> filmes = findAll();
         return filmes.stream().sorted(Comparator.comparingDouble(Filme::getNota)).toList();
     }
@@ -98,7 +99,7 @@ public class FilmeRepository {
             int index = existente.getId() - 1;
 
             if (index < 0 || index >= lines.size()){
-                throw new ResourceNotFoundExeception("Recurso não encontrado");
+                throw new ResourceNotFoundExeception("RECURSO NÃO ENCONTRADO");
             }
 
             lines.set(index, existente.getId() + ";" + existente.getTitulo() + ";" + existente.getGenero() + ";" + existente.getDiretor() + ";" + existente.getAno() + ";" + existente.getNota());
@@ -106,7 +107,7 @@ public class FilmeRepository {
             Files.write(Paths.get(ARQUIVO), lines);
 
         }catch (IOException | IndexOutOfBoundsException e) {
-            throw new ResourceNotFoundExeception("Recurso não encontrado");
+            throw new ResourceNotFoundExeception("RECURSO NÃO ENCONTRADO");
         }
         return existente;
     }
@@ -117,7 +118,7 @@ public class FilmeRepository {
             String fime = lines.remove(id - 1);
             Files.write(Paths.get(ARQUIVO), lines);
         } catch (IOException | IndexOutOfBoundsException e) {
-            throw new ResourceNotFoundExeception("Recurso não encontrado");
+            throw new ResourceNotFoundExeception("RECURSO NÃO ENCONTRADO");
         }
     }
 

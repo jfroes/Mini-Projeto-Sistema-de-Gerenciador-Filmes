@@ -11,19 +11,21 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class FilmeService {
+    private FilmeRepository repository = new FilmeRepository();
 
-    public FilmeDTO insert (FilmeDTO dto){
+    public String insert (FilmeDTO dto){
         Filme filme = new Filme(dto.getTitulo(), dto.getGenero(), dto.getDiretor(), dto.getAno(), dto.getNota());
 
         if (repository.findAll().stream().anyMatch(f -> f.getTitulo().equalsIgnoreCase(dto.getTitulo()))){
             throw new DuplicatedResourceException("Já existe recurso com esse nome");
         }else{
-            repository.save(filme);
-            return new FilmeDTO(filme);
+            return repository.save(filme);
         }
     }
 
-    private FilmeRepository repository = new FilmeRepository();
+    public void deleteFilme(int id){
+            repository.delete(id);
+    }
 
     public List<FilmeDTO> findAll(){
         List<Filme> filmes = repository.findAll();
@@ -35,7 +37,7 @@ public class FilmeService {
             Filme filme = repository.findById(id).get();
             return new FilmeDTO(filme);
         }catch (ResourceNotFoundExeception | NoSuchElementException e){
-            throw new ResourceNotFoundExeception("Recurso não encontrado.");
+            throw new ResourceNotFoundExeception("RECURSO NÃO ENCONTRADO");
         }
     }
 
@@ -45,7 +47,7 @@ public class FilmeService {
             return filmes.stream().map(filme -> new FilmeDTO(filme)).toList();
 
         }catch (ResourceNotFoundExeception | NoSuchElementException e){
-            throw new ResourceNotFoundExeception("Recurso não encontrado.");
+            throw new ResourceNotFoundExeception("RECURSO NÃO ENCONTRADO.");
         }
     }
 
@@ -53,7 +55,7 @@ public class FilmeService {
         try{
             return repository.findByDiretor(diretor).stream().map(FilmeDTO::new).toList();
         }catch (ResourceNotFoundExeception | NoSuchElementException e){
-            throw new ResourceNotFoundExeception("Recurso não encontrado.");
+            throw new ResourceNotFoundExeception("RECURSO NÃO ENCONTRADO.");
 
         }
     }
@@ -62,7 +64,7 @@ public class FilmeService {
         try{
             return repository.findByAno(ano).stream().map(FilmeDTO::new).toList();
         }catch (ResourceNotFoundExeception e ){
-            throw new ResourceNotFoundExeception("Recurso não encontrado.");
+            throw new ResourceNotFoundExeception("RECURSO NÃO ENCONTRADO.");
         }
     }
 
@@ -71,7 +73,7 @@ public class FilmeService {
              filmes = repository.findByTitulo(titulo).stream().map(FilmeDTO::new).toList();
 
              if (filmes.isEmpty()){
-                 throw new ResourceNotFoundExeception("Recurso não encontrado.");
+                 throw new ResourceNotFoundExeception("RECURSO NÃO ENCONTRADO.");
              }
             return filmes;
     }
@@ -82,7 +84,7 @@ public class FilmeService {
             return filmes.stream().map(filme -> new FilmeDTO(filme)).toList();
 
         }catch (ResourceNotFoundExeception | NoSuchElementException e){
-            throw new ResourceNotFoundExeception("Recurso não encontrado.");
+            throw new ResourceNotFoundExeception("RECURSO NÃO ENCONTRADO.");
         }
     }
 
@@ -92,7 +94,7 @@ public class FilmeService {
             return filmes.stream().map(filme -> new FilmeDTO(filme)).toList();
 
         }catch (ResourceNotFoundExeception | NoSuchElementException e){
-            throw new ResourceNotFoundExeception("Recurso não encontrado.");
+            throw new ResourceNotFoundExeception("RECURSO NÃO ENCONTRADO.");
         }
     }
 
@@ -100,7 +102,7 @@ public class FilmeService {
         try{
             if (repository.findAll().stream().anyMatch(f -> f.getTitulo().equalsIgnoreCase(dto.getTitulo())) &&
             repository.findAll().stream().noneMatch(f -> f.getId().equals(dto.getId()))){
-                throw new DuplicatedResourceException("Já existe um recurso com este nome");
+                throw new DuplicatedResourceException("JÁ EXISTE UM RECURSO COM ESTE NOME");
             }
 
             Filme filme = new Filme(dto.getId(), dto.getTitulo(), dto.getGenero(), dto.getDiretor(), dto.getAno(), dto.getNota());
@@ -109,7 +111,7 @@ public class FilmeService {
 
             return new FilmeDTO(filme);
         }catch (IndexOutOfBoundsException e){
-            throw new ResourceNotFoundExeception("Recurso não encontrado.");
+            throw new ResourceNotFoundExeception("RECURSO NÃO ENCONTRADO.");
         }
     }
 }

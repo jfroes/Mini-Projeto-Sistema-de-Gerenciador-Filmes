@@ -6,5 +6,4 @@
 6;Interestelar;Ficção Científica;Christopher Nolan;2014;8.6
 7;Gladiador;Ação;Ridley Scott;2000;8.5
 8;A Origem;Ficção Científica;Christopher Nolan;2010;8.8
-9;Forrest Gump;Drama;Robert Zemeckis;1994;8.8
-10;O Cavaleiro das Trevas;Ação;Christopher Nolan;2008;9.0
+9;Psicose;Terror;Alfred Hitchcock;1960;8.5
